@@ -1,16 +1,24 @@
 PODS:
+  - HandyJSON (5.0.2)
   - SnapKit (5.0.1)
+  - SwiftyJSON (5.0.0)
 
 DEPENDENCIES:
+  - HandyJSON
   - SnapKit
+  - SwiftyJSON
 
 SPEC REPOS:
   trunk:
+    - HandyJSON
     - SnapKit
+    - SwiftyJSON
 
 SPEC CHECKSUMS:
+  HandyJSON: 9e4e236f5d2dbefad5155a77417bbea438201c03
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
+  SwiftyJSON: 36413e04c44ee145039d332b4f4e2d3e8d6c4db7
 
-PODFILE CHECKSUM: 334269848406352acb7bdaf4c083d23c85c8fe4a
+PODFILE CHECKSUM: c324070f0327c0c0adfb001ebbb2eb5811483a14
 
 COCOAPODS: 1.8.4
