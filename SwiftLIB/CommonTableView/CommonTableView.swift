@@ -13,6 +13,17 @@ class CommonTableView: UIView, UITableViewDelegate, UITableViewDataSource,Common
     
     var tableView: UITableView?
     
+    private var _dataSource: [StockHQ]?
+    var dataSource: [StockHQ]? {
+        set {
+            _dataSource = newValue
+            tableView?.reloadData()
+        }
+        get {
+            return _dataSource
+        }
+    }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         createTableView()
@@ -46,7 +57,7 @@ class CommonTableView: UIView, UITableViewDelegate, UITableViewDataSource,Common
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 20
+        return _dataSource?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -56,6 +67,9 @@ class CommonTableView: UIView, UITableViewDelegate, UITableViewDataSource,Common
             cell?.selectionStyle = .none
         }
         let c = cell as! CommonTableViewCell
+        if indexPath.row < _dataSource?.count ?? 0 {
+            c.setSubViewProperty(model: _dataSource?[indexPath.row] ?? StockHQ())
+        }
         c.delegate = self
         return c
     }

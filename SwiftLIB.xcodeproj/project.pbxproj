@@ -73,7 +73,6 @@
 				8992025925C8ED38001C969D /* CommonTableView.swift */,
 				8992025C25C8F69F001C969D /* CommonTableViewCell.swift */,
 				89E8554925CA4346000EA364 /* CommonTableViewHeader.swift */,
-				8992025F25C8FEA4001C969D /* CommonConfig.swift */,
 			);
 			path = CommonTableView;
 			sourceTree = "<group>";
@@ -151,6 +150,7 @@
 			isa = PBXGroup;
 			children = (
 				89E8555E25CA7BF0000EA364 /* CommonViewModel.swift */,
+				8992025F25C8FEA4001C969D /* CommonConfig.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";

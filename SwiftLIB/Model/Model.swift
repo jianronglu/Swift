@@ -6,8 +6,9 @@
 //
 
 import Foundation
+import HandyJSON // json 与 model 互换第三方库
 
-class ExtraData: NSObject {
+class ExtraData: HandyJSON {
     var monthChgRatio: Int?
     var actBSFlag: Int?
     var buyTotalVol: Int?
@@ -43,9 +44,11 @@ class ExtraData: NSObject {
     var thisYearChgRatio: Int?
     var minPrice52Week: Int?
     var sellAvgPrice: Int?
+    
+    required init() {} // 使用 HandyJSON 必须
 }
 
-class XsbData: NSObject {
+class XsbData: HandyJSON {
     var zrType: Int?
     var securityType: Int?
     var fcType: Int?
@@ -54,9 +57,11 @@ class XsbData: NSObject {
     var marketMakeCount: Int?
     var diffRight: Int?
     var tpStatus: Int?
+    
+    required init() {}
 }
 
-class StockHQ: NSObject {
+class StockHQ: HandyJSON {
     var xsb: XsbData?
     var extData: ExtraData?
     var equalCount: Int?
@@ -166,4 +171,6 @@ class StockHQ: NSObject {
     var warrantType: Int?
     var divideLFY: Int?
     var sameRight: Bool?
+    
+    required init() {}
 }

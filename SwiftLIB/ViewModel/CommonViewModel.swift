@@ -6,40 +6,44 @@
 //
 
 import Foundation
-import SwiftyJSON
 
 class CommonViewModel: NSObject {
     func fetchData(complete:@escaping (_ list: [StockHQ]) -> Void){
         
-        var array: [StockHQ] = []
-        let model = StockHQ()
-        array.append(model)
+        let array:[StockHQ] = fetchLocalJson()
+        
         complete(array)
     }
     
-    func fetchLocalJson() -> [StockHQ] {
-        let jsonPath = Bundle.main.path(forResource: "CommonData", ofType: "json")
-        guard jsonPath?.count != 0 else { return []}
+    private func fetchLocalJson() -> [StockHQ] {
         
-        let d = NSData.init(contentsOfFile: jsonPath ?? "")
+        let jsonPath = filepath()
         
+        guard jsonPath.count != 0 else { return []}
         
-        //let jsonDict = try! JSONSerialization.jsonObject(with: data! as Data, options: JSONSerialization.ReadingOptions.mutableContainers) as! Dictionary<String, Any>
         var mArray:[StockHQ] = []
         
-        do {
-            let dict = try JSON.init(data: d! as Data)
-            let array = dict["dataArray"]
-            for _ in array {
-                let model = StockHQ()
-                mArray.append(model)
-            }
-            
-        } catch {
-            print(error)
-        }
+        let data = NSData.init(contentsOfFile: jsonPath)
         
+        let jsonDict = try! JSONSerialization.jsonObject(with: data! as Data, options: JSONSerialization.ReadingOptions.mutableContainers) as! Dictionary<String, Any>
+        
+        let array = jsonDict["dataArray"] as! Array<Dictionary<String, Any>>
+        
+        for dict in array {
+            let model = StockHQ.deserialize(from: dict)
+            
+            if model != nil {
+                if model?.longName?.count != 0 {
+                    model?.name = model?.longName
+                }
+                mArray.append(model!)
+            }
+        }
         return mArray
+    }
+    
+    private func filepath() -> String {
+        return Bundle.main.path(forResource: "CommonData", ofType: "json") ?? ""
     }
 }
 

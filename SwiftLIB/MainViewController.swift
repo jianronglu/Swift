@@ -9,7 +9,8 @@ import UIKit
 import SnapKit
 
 class MainViewController: UIViewController {
-
+    var tableView: CommonTableView?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -18,20 +19,18 @@ class MainViewController: UIViewController {
         view.backgroundColor = UIColor.white
         
         let vm = CommonViewModel()
-
+        
+        weak var wSelf = self
         vm.fetchData { (array) in
-            print(array)
+            wSelf?.tableView?.dataSource = array
         }
-        
-        vm.fetchLocalJson()
-        
     }
     
     /// init table view
     func creatSubView()  {
-        let tableView = CommonTableView()
-        view.addSubview(tableView)
-        tableView.snp.makeConstraints { (make) in
+        tableView = CommonTableView()
+        view.addSubview(tableView!)
+        tableView?.snp.makeConstraints { (make) in
             make.edges.equalTo(view)
         }
     }

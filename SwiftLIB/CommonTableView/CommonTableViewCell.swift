@@ -180,4 +180,9 @@ class CommonTableViewCell: UITableViewCell, UIScrollViewDelegate{
     func updateScrollViewOffset(offset: CGPoint) {
         rightContentScrollView?.setContentOffset(offset, animated: false)
     }
+    
+    func setSubViewProperty(model: StockHQ) {
+        nameLabel?.text = model.name
+        codeLabel?.text = model.code
+    }
 }
