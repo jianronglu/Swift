@@ -9,13 +9,10 @@ import UIKit
 import SnapKit
 
 protocol CommonTableViewCellDelegate: AnyObject {
-    func commonTableViewCellDidScroll(cell: CommonTableViewCell, scrollView: UIScrollView)
+    func commonTableViewCellDidScroll(cell: CommonTableViewCell?, scrollView: UIScrollView)
 }
 
-
 class CommonTableViewCell: UITableViewCell, UIScrollViewDelegate{
-    let lr_margin = 10.0
-    let l_view_width = 90.0
     
     var leftContentView: UIView?
     var rightContentScrollView: UIScrollView?
@@ -34,6 +31,7 @@ class CommonTableViewCell: UITableViewCell, UIScrollViewDelegate{
     weak var config: CommonTableViewCellConfig? {
         set {
             _config = newValue
+            configCell()
         }
         get {
             return _config
@@ -42,7 +40,6 @@ class CommonTableViewCell: UITableViewCell, UIScrollViewDelegate{
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        configCell()
     }
     
     convenience init(style: UITableViewCell.CellStyle, reuseIdentifier: String?, config: CommonTableViewCellConfig) {
@@ -54,30 +51,29 @@ class CommonTableViewCell: UITableViewCell, UIScrollViewDelegate{
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configCell() {
+    private func configCell() {
         configLeftSubView()
         configRighSubView()
     }
     
-    func configLeftSubView() {
+    private func configLeftSubView() {
         leftContentView = UIView()
         contentView.addSubview(leftContentView!)
         leftContentView?.snp.makeConstraints { (make) in
-            make.left.equalToSuperview().offset(lr_margin)
+            make.left.equalToSuperview().offset(commonTableView_lr_margin)
             make.top.bottom.equalToSuperview()
-            make.width.equalTo(l_view_width);
+            make.width.equalTo(commonTable_l_viewWidth)
         }
         
         nameLabel = UILabel()
-        nameLabel?.font = UIFont.systemFont(ofSize: 14)
-        nameLabel?.text = "四维图新"
+        nameLabel?.font = UIFont.boldSystemFont(ofSize: 14)
         nameLabel?.textColor = UIColor.init(rgb: 0x333333)
         nameLabel?.adjustsFontSizeToFitWidth = true
         nameLabel?.textAlignment = .left
         leftContentView?.addSubview(nameLabel!)
         nameLabel?.snp.makeConstraints({ (make) in
             make.left.top.right.equalToSuperview()
-            make.bottom.equalTo(leftContentView!.snp_centerYWithinMargins)
+            make.height.equalTo(leftContentView!).multipliedBy(0.66)
         })
         
         let tagArr = ["融"]
@@ -85,10 +81,10 @@ class CommonTableViewCell: UITableViewCell, UIScrollViewDelegate{
         for tag in tagArr {
             let label = UILabel()
             label.text = tag
-            label.font = UIFont.systemFont(ofSize: 10)
-            label.textColor = UIColor.red
+            label.font = UIFont.systemFont(ofSize: 8)
+            label.textColor = UIColor.purple
             label.layer.borderWidth = 1
-            label.layer.borderColor = UIColor.red.cgColor
+            label.layer.borderColor = UIColor.purple.cgColor
             label.layer.cornerRadius = 2
             label.textAlignment = .center
             leftContentView?.addSubview(label)
@@ -99,11 +95,11 @@ class CommonTableViewCell: UITableViewCell, UIScrollViewDelegate{
         
         for label in tagTypes! {
             label.snp.makeConstraints { (make) in
-                make.top.equalTo(nameLabel!.snp_bottomMargin).offset(10)
-                let width = label.intrinsicContentSize.width
-                make.width.equalTo(width+3)
+                let size = label.intrinsicContentSize
+                make.size.equalTo(CGSize(width: size.width+3, height: size.height+2))
+                make.top.equalTo(nameLabel!.snp.bottom)
                 if preLabel != nil {
-                    make.left.equalTo(preLabel!.snp_rightMargin).offset(10)
+                    make.left.equalTo(preLabel!.snp.right).offset(2)
                 } else {
                     make.left.equalToSuperview()
                 }
@@ -112,37 +108,36 @@ class CommonTableViewCell: UITableViewCell, UIScrollViewDelegate{
         }
         
         codeLabel = UILabel()
-        codeLabel?.text = "002405"
         codeLabel?.textColor = UIColor.init(rgb: 0x999999)
-        codeLabel?.font = UIFont.systemFont(ofSize: 10)
+        codeLabel?.font = UIFont.systemFont(ofSize: 12)
         codeLabel?.textAlignment = .left
         leftContentView?.addSubview(codeLabel!)
 
         codeLabel?.snp.makeConstraints({ (make) in
             if preLabel != nil {
-                make.left.equalTo(preLabel!.snp_rightMargin).offset(10)
+                make.left.equalTo(preLabel!.snp.right).offset(2)
+                make.centerY.equalTo(preLabel!.snp.centerY)
             } else {
                 make.left.equalToSuperview()
+                make.top.equalTo(nameLabel!.snp.bottom)
             }
-            make.top.equalTo(nameLabel!.snp_bottomMargin).offset(10)
         })
     }
     
-    func configRighSubView() {
-        
+    private func configRighSubView() {
         rightContentScrollView = UIScrollView()
         rightContentScrollView?.bounces = false
         rightContentScrollView?.delegate = self
         rightContentScrollView?.showsHorizontalScrollIndicator = false
         contentView.addSubview(rightContentScrollView!)
         rightContentScrollView?.snp.makeConstraints { (make) in
-            make.left.equalTo(leftContentView!.snp_rightMargin).offset(10)
+            make.left.equalTo(leftContentView!.snp.right)
             make.top.bottom.equalToSuperview()
-            make.right.equalToSuperview().offset(-lr_margin)
+            make.right.equalToSuperview().offset(-commonTableView_lr_margin)
         }
         
         rightLabels = []
-        let titles = commonTableViewHeaderTitles.components(separatedBy: ",")
+        let titles = commonTableViewRightItemTitles.components(separatedBy: ",")
         for title in titles {
             let label = UILabel()
             label.font = UIFont.systemFont(ofSize: 15)
@@ -160,10 +155,10 @@ class CommonTableViewCell: UITableViewCell, UIScrollViewDelegate{
                 if preLabel == nil {
                     make.left.equalToSuperview()
                 } else {
-                    make.left.equalTo(preLabel!.snp_rightMargin).offset(10)
+                    make.left.equalTo(preLabel!.snp.right).offset(2)
                 }
                 make.top.height.equalToSuperview()
-                make.width.equalTo(100)
+                make.width.equalTo(commonTableItemWidth)
             }
             preLabel = label
         }
@@ -177,12 +172,15 @@ class CommonTableViewCell: UITableViewCell, UIScrollViewDelegate{
         delegate?.commonTableViewCellDidScroll(cell: self, scrollView: rightContentScrollView!)
     }
     
-    func updateScrollViewOffset(offset: CGPoint) {
+    // 默认就是 internal
+    internal func updateScrollViewOffset(offset: CGPoint) {
         rightContentScrollView?.setContentOffset(offset, animated: false)
     }
     
-    func setSubViewProperty(model: StockHQ) {
-        nameLabel?.text = model.name
-        codeLabel?.text = model.code
+    internal func setSubViewProperty(model: TableItemModel) {
+        let stockHq = model.stockHq
+        
+        nameLabel?.text = stockHq?.name
+        codeLabel?.text = stockHq?.code
     }
 }

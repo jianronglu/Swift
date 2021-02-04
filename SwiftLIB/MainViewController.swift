@@ -21,8 +21,8 @@ class MainViewController: UIViewController {
         let vm = CommonViewModel()
         
         weak var wSelf = self
-        vm.fetchData { (array) in
-            wSelf?.tableView?.dataSource = array
+        vm.fetchData { (stockArr, itemArr) in
+            wSelf?.tableView?.dataSource = itemArr
         }
     }
     

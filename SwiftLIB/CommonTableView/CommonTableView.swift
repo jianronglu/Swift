@@ -7,14 +7,17 @@
 
 import UIKit
 
-class CommonTableView: UIView, UITableViewDelegate, UITableViewDataSource,CommonTableViewCellDelegate {
+class CommonTableView: UIView, UITableViewDelegate, UITableViewDataSource,CommonTableViewCellDelegate, CommonTableViewHeaderDelegate {
+    
     let commonTableViewCellKey = "commonCellKey"
     let config = CommonTableViewCellConfig().defaultCellConfig()
+    var commonHeaderView: CommonTableViewHeader?
+    
     
     var tableView: UITableView?
     
-    private var _dataSource: [StockHQ]?
-    var dataSource: [StockHQ]? {
+    private var _dataSource: [TableItemModel]?
+    var dataSource: [TableItemModel]? {
         set {
             _dataSource = newValue
             tableView?.reloadData()
@@ -43,8 +46,7 @@ class CommonTableView: UIView, UITableViewDelegate, UITableViewDataSource,Common
         tableView?.rowHeight = 50
         tableView?.estimatedRowHeight = 50
         tableView?.separatorInset = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
-        tableView?.separatorColor = UIColor.init(rgb: 0x999999)
-        //tableView?.register(CommonTableViewCell.self, forCellReuseIdentifier: commonTableViewCellKey)
+        tableView?.separatorColor = UIColor.init(rgb: 0xBBBBBBB)
         self.addSubview(tableView!)
         
         tableView?.snp.makeConstraints { (make) in
@@ -68,23 +70,41 @@ class CommonTableView: UIView, UITableViewDelegate, UITableViewDataSource,Common
         }
         let c = cell as! CommonTableViewCell
         if indexPath.row < _dataSource?.count ?? 0 {
-            c.setSubViewProperty(model: _dataSource?[indexPath.row] ?? StockHQ())
+            c.setSubViewProperty(model: _dataSource?[indexPath.row] ?? TableItemModel())
         }
         c.delegate = self
         return c
     }
         
-    func commonTableViewCellDidScroll(cell: CommonTableViewCell, scrollView: UIScrollView) {
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 40.0
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let frame = CGRect(x: 0, y: 0, width: self.frame.size.width, height: 40)
+        commonHeaderView = CommonTableViewHeader.init(frame: frame)
+        return commonHeaderView!
+    }
+    
+    func commonTableViewCellDidScroll(cell: CommonTableViewCell?, scrollView: UIScrollView) {
         let cells = tableView?.visibleCells
         guard cells?.count != 0 else {
             return
         }
+        
+        let offset = scrollView.contentOffset
+        
+        commonHeaderView?.setContentOffset(offset: offset)
+        
         // FIXME: 同步滑动有卡顿-需要优化
         for cell  in cells! {
             let c = cell as! CommonTableViewCell
-            c.updateScrollViewOffset(offset: scrollView.contentOffset)
+            c.updateScrollViewOffset(offset: offset)
         }
-        
     }
     
+    func commonHeaderDidScroll(commonHeaderView: CommonTableViewHeader?, scrollView: UIScrollView) {
+        commonTableViewCellDidScroll(cell: nil, scrollView: scrollView)
+    }
 }

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8908DFB725CBEA7100E2F584 /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8908DFB625CBEA7100E2F584 /* R.generated.swift */; };
 		8992025A25C8ED38001C969D /* CommonTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8992025925C8ED38001C969D /* CommonTableView.swift */; };
 		8992025D25C8F69F001C969D /* CommonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8992025C25C8F69F001C969D /* CommonTableViewCell.swift */; };
 		8992026025C8FEA4001C969D /* CommonConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8992025F25C8FEA4001C969D /* CommonConfig.swift */; };
@@ -28,6 +29,7 @@
 		6B5F23A1FE91B625EC1A8F08 /* libPods-SwiftLIB.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SwiftLIB.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7209AB0DE3FCC73CABEBFCE4 /* Pods-SwiftLIB.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftLIB.debug.xcconfig"; path = "Target Support Files/Pods-SwiftLIB/Pods-SwiftLIB.debug.xcconfig"; sourceTree = "<group>"; };
 		832EB6977BE5440C58E2F227 /* Pods-SwiftLIB.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftLIB.release.xcconfig"; path = "Target Support Files/Pods-SwiftLIB/Pods-SwiftLIB.release.xcconfig"; sourceTree = "<group>"; };
+		8908DFB625CBEA7100E2F584 /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = SOURCE_ROOT; };
 		8992025925C8ED38001C969D /* CommonTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonTableView.swift; sourceTree = "<group>"; };
 		8992025C25C8F69F001C969D /* CommonTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonTableViewCell.swift; sourceTree = "<group>"; };
 		8992025F25C8FEA4001C969D /* CommonConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonConfig.swift; sourceTree = "<group>"; };
@@ -123,6 +125,7 @@
 				89E8554C25CA6F39000EA364 /* Resource */,
 				8992026925C9470B001C969D /* Define */,
 				89C4E6DC25C7E5F300B85C0C /* MainViewController.swift */,
+				8908DFB625CBEA7100E2F584 /* R.generated.swift */,
 				89C4E6E125C7E5F700B85C0C /* Assets.xcassets */,
 				89C4E6E325C7E5F700B85C0C /* LaunchScreen.storyboard */,
 				89C4E6E625C7E5F700B85C0C /* Info.plist */,
@@ -171,6 +174,7 @@
 			buildConfigurationList = 89C4E6E925C7E5F700B85C0C /* Build configuration list for PBXNativeTarget "SwiftLIB" */;
 			buildPhases = (
 				91D6CD04E5009ED389FAA1DB /* [CP] Check Pods Manifest.lock */,
+				8908DFB125CBE47900E2F584 /* Run Script */,
 				89C4E6D125C7E5F300B85C0C /* Sources */,
 				89C4E6D225C7E5F300B85C0C /* Frameworks */,
 				89C4E6D325C7E5F300B85C0C /* Resources */,
@@ -230,6 +234,26 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		8908DFB125CBE47900E2F584 /* Run Script */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"$TEMP_DIR/rswift-lastrun",
+			);
+			name = "Run Script";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				$SRCROOT/R.generated.swift,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n\"$PODS_ROOT/R.swift/rswift\" generate \"$SRCROOT/R.generated.swift\"\n";
+		};
 		91D6CD04E5009ED389FAA1DB /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -240,6 +264,7 @@
 			inputPaths = (
 				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
 				"${PODS_ROOT}/Manifest.lock",
+				"$(SRCROOT)/newInputFile",
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputFileListPaths = (
@@ -270,6 +295,7 @@
 				89C4E6D925C7E5F300B85C0C /* AppDelegate.swift in Sources */,
 				89C4E6DB25C7E5F300B85C0C /* SceneDelegate.swift in Sources */,
 				8992025D25C8F69F001C969D /* CommonTableViewCell.swift in Sources */,
+				8908DFB725CBEA7100E2F584 /* R.generated.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

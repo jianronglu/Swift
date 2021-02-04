@@ -6,18 +6,18 @@
 //
 
 import UIKit
-
+import SnapKit
 class CommonTableViewCellConfig {
-    var leftContentViewWidth: CGFloat?
-    var rightContentScrollViewWidth: CGFloat?
-    var rightItemDefaultWith: CGFloat?
-    var rightItemMarginWith: CGFloat?
+    var leftContentViewWidth: ConstraintRelatableTarget?
+    var rightContentScrollViewWidth: ConstraintRelatableTarget?
+    var rightItemWidth: ConstraintRelatableTarget?
+    var rightItemMargin: ConstraintRelatableTarget?
     
     func defaultCellConfig() -> CommonTableViewCellConfig {
         let config = CommonTableViewCellConfig()
         config.leftContentViewWidth = 80.0
-        config.rightItemDefaultWith = 100.0
-        config.rightItemMarginWith = 10.0
+        config.rightItemWidth = 100.0
+        config.rightItemMargin = 10.0
         return config
     }
 }

@@ -174,3 +174,8 @@ class StockHQ: HandyJSON {
     
     required init() {}
 }
+
+class TableItemModel: HandyJSON {
+    var stockHq: StockHQ?
+    required init() {}
+}

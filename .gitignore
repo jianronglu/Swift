@@ -27,3 +27,6 @@ Package.resolved
 *.xcodeproj
 
 Pods/*.lock
+
+
+*.generated.swift
