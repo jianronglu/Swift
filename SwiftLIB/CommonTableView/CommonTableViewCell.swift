@@ -177,10 +177,8 @@ class CommonTableViewCell: UITableViewCell, UIScrollViewDelegate{
         rightContentScrollView?.setContentOffset(offset, animated: false)
     }
     
-    internal func setSubViewProperty(model: TableItemModel) {
-        let stockHq = model.stockHq
-        
-        nameLabel?.text = stockHq?.name
-        codeLabel?.text = stockHq?.code
+    internal func setSubViewProperty(model: TableItemModel?) {
+        nameLabel?.text = model?.name
+        codeLabel?.text = model?.code
     }
 }

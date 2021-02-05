@@ -13,6 +13,7 @@
 		8992026025C8FEA4001C969D /* CommonConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8992025F25C8FEA4001C969D /* CommonConfig.swift */; };
 		8992026625C92C80001C969D /* CommonExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8992026525C92C80001C969D /* CommonExtension.swift */; };
 		8992026B25C9474C001C969D /* CommonDefine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8992026A25C9474C001C969D /* CommonDefine.swift */; };
+		89B5676D25CCE48C0095392D /* DecimalNumberUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89B5676C25CCE48C0095392D /* DecimalNumberUtil.swift */; };
 		89C4E6D925C7E5F300B85C0C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89C4E6D825C7E5F300B85C0C /* AppDelegate.swift */; };
 		89C4E6DB25C7E5F300B85C0C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89C4E6DA25C7E5F300B85C0C /* SceneDelegate.swift */; };
 		89C4E6DD25C7E5F300B85C0C /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89C4E6DC25C7E5F300B85C0C /* MainViewController.swift */; };
@@ -35,6 +36,7 @@
 		8992025F25C8FEA4001C969D /* CommonConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonConfig.swift; sourceTree = "<group>"; };
 		8992026525C92C80001C969D /* CommonExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonExtension.swift; sourceTree = "<group>"; };
 		8992026A25C9474C001C969D /* CommonDefine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonDefine.swift; sourceTree = "<group>"; };
+		89B5676C25CCE48C0095392D /* DecimalNumberUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecimalNumberUtil.swift; sourceTree = "<group>"; };
 		89C4E6D525C7E5F300B85C0C /* SwiftLIB.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftLIB.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		89C4E6D825C7E5F300B85C0C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		89C4E6DA25C7E5F300B85C0C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -95,6 +97,14 @@
 			path = Define;
 			sourceTree = "<group>";
 		};
+		89B5676B25CCE3800095392D /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				89B5676C25CCE48C0095392D /* DecimalNumberUtil.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
 		89C4E6CC25C7E5F300B85C0C = {
 			isa = PBXGroup;
 			children = (
@@ -124,6 +134,7 @@
 				89E8555425CA790A000EA364 /* Model */,
 				89E8554C25CA6F39000EA364 /* Resource */,
 				8992026925C9470B001C969D /* Define */,
+				89B5676B25CCE3800095392D /* Utils */,
 				89C4E6DC25C7E5F300B85C0C /* MainViewController.swift */,
 				8908DFB625CBEA7100E2F584 /* R.generated.swift */,
 				89C4E6E125C7E5F700B85C0C /* Assets.xcassets */,
@@ -289,6 +300,7 @@
 				8992025A25C8ED38001C969D /* CommonTableView.swift in Sources */,
 				89E8555C25CA7963000EA364 /* Model.swift in Sources */,
 				89C4E6DD25C7E5F300B85C0C /* MainViewController.swift in Sources */,
+				89B5676D25CCE48C0095392D /* DecimalNumberUtil.swift in Sources */,
 				89E8554A25CA4346000EA364 /* CommonTableViewHeader.swift in Sources */,
 				8992026025C8FEA4001C969D /* CommonConfig.swift in Sources */,
 				89E8555F25CA7BF0000EA364 /* CommonViewModel.swift in Sources */,

@@ -14,26 +14,30 @@ protocol CommonTableViewHeaderDelegate: AnyObject {
     func commonHeaderDidScroll(commonHeaderView: CommonTableViewHeader?, scrollView: UIScrollView)
 }
 
+protocol SortItemViewDelegate: AnyObject {
+    func sortItemDidClicked(sortItemView: SortItemView)
+}
+
 enum SortType: Int {
     case Defult
     case Descending
     case Ascending
 }
 
-class SortView: UIView {
+class SortItemView: UIView {
     private var sortImgeView: UIImageView
     private var label: UILabel
     
     var sortType: SortType
-    
-//    var didClickBlock = Block.self
-    
+    var delegate: SortItemViewDelegate?
+
     override init(frame: CGRect) {
         sortImgeView = UIImageView()
         label = UILabel()
         sortType = .Defult
+        
         super.init(frame: frame)
-        layoutUI()
+        layoutPerporty()
         addTap()
     }
     
@@ -63,23 +67,21 @@ class SortView: UIView {
         }
     }
     
-    private func layoutUI() {
+    private func layoutPerporty() {
         self.addSubview(sortImgeView)
         sortImgeView.snp.makeConstraints { (make) in
-            make.width.equalTo(8)
+            make.width.equalTo(6)
             make.height.equalTo(10)
             make.centerY.equalToSuperview()
             make.right.equalToSuperview()
         }
         
-        label.font = UIFont.systemFont(ofSize: 15)
-        label.textColor = UIColor.init(rgb: 0x333333)
-        label.textAlignment = .right
-        label.adjustsFontSizeToFitWidth = true
+        self.addSubview(label)
         label.snp.makeConstraints { (make) in
             make.left.top.bottom.equalToSuperview()
             make.right.equalTo(sortImgeView.snp.left)
         }
+        imageType(type: .Defult)
     }
     func title(text: String?) {
         label.text = text
@@ -90,19 +92,41 @@ class SortView: UIView {
         self.addGestureRecognizer(tap)
     }
     
+    func textColor(color: UIColor) {
+        label.textColor = color
+    }
+    
+    func font(font: UIFont) {
+        label.font = font
+    }
+    
+    func textAlignment(align: NSTextAlignment) {
+        label.textAlignment = align
+    }
+    
+    func adjustsFontSizeToFitWidth(adjustsFont : Bool) {
+        label.adjustsFontSizeToFitWidth = adjustsFont
+    }
+    
     @objc func click() {
+        guard delegate != nil else { return }
+        delegate?.sortItemDidClicked(sortItemView: self)
+        
         let type = nextType(type: sortType)
         imageType(type: type)
         sortType = type
     }
+    func defultType() {
+        imageType(type: .Defult)
+    }
 }
 
-class CommonTableViewHeader: UIView, UIScrollViewDelegate {
+class CommonTableViewHeader: UIView, UIScrollViewDelegate, SortItemViewDelegate {
     var nameLabel: UILabel?
     
     // right subviews
     var rightContentScrollView: UIScrollView?
-    var itemLabels: [UILabel]?
+    var items: [SortItemView]?
     
     var sortImageView: UIImageView?
     
@@ -117,6 +141,7 @@ class CommonTableViewHeader: UIView, UIScrollViewDelegate {
     }
     
     private func createUI() {
+        backgroundColor = UIColor.init(rgb: 0xEEEEEE)
         configLeftSubView()
         configRightSubView()
     }
@@ -148,32 +173,33 @@ class CommonTableViewHeader: UIView, UIScrollViewDelegate {
             make.top.bottom.equalToSuperview()
             make.right.equalToSuperview().offset(-commonTableView_lr_margin)
         }
-        
+
         let titles = commonTableViewRightItemTitles.components(separatedBy: ",")
-        itemLabels = []
+        items = []
         for title in titles {
-            let label = UILabel()
-            label.font = UIFont.systemFont(ofSize: 15)
-            label.textColor = UIColor.init(rgb: 0x333333)
-            label.text = title
-            label.textAlignment = .right
-            label.adjustsFontSizeToFitWidth = true
-            rightContentScrollView?.addSubview(label)
-            itemLabels?.append(label)
+            let item = SortItemView()
+            item.font(font: UIFont.systemFont(ofSize: 13))
+            item.textColor(color: UIColor.init(rgb: 0x333333))
+            item.title(text: title)
+            item.textAlignment(align: .right)
+            item.adjustsFontSizeToFitWidth(adjustsFont: true)
+            rightContentScrollView?.addSubview(item)
+            item.delegate = self
+            items?.append(item)
         }
 
-        var preLabel: UILabel?
-        for label in itemLabels! {
-            label.snp.makeConstraints { (make) in
-                if preLabel == nil {
+        var preItem: SortItemView?
+        for item in items! {
+            item.snp.makeConstraints { (make) in
+                if preItem == nil {
                     make.left.equalToSuperview()
                 } else {
-                    make.left.equalTo(preLabel!.snp.right).offset(2)
+                    make.left.equalTo(preItem!.snp.right).offset(2)
                 }
                 make.top.height.equalToSuperview()
                 make.width.equalTo(commonTableItemWidth)
             }
-            preLabel = label
+            preItem = item
         }
         rightContentScrollView?.contentSize = CGSize(width: (100+2)*titles.count, height: 0)
     }
@@ -186,5 +212,14 @@ class CommonTableViewHeader: UIView, UIScrollViewDelegate {
         guard delegate != nil else { return }
         
         delegate?.commonHeaderDidScroll(commonHeaderView: self, scrollView: scrollView)
+    }
+    
+    func sortItemDidClicked(sortItemView: SortItemView) {
+        guard items?.count != 0 else { return }
+        for item in items! {
+            if item != sortItemView {
+                item.defultType()
+            }
+        }
     }
 }

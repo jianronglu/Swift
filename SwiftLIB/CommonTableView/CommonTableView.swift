@@ -84,6 +84,7 @@ class CommonTableView: UIView, UITableViewDelegate, UITableViewDataSource,Common
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let frame = CGRect(x: 0, y: 0, width: self.frame.size.width, height: 40)
         commonHeaderView = CommonTableViewHeader.init(frame: frame)
+        commonHeaderView?.delegate = self
         return commonHeaderView!
     }
     

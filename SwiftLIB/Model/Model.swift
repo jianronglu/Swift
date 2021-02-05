@@ -176,6 +176,20 @@ class StockHQ: HandyJSON {
 }
 
 class TableItemModel: HandyJSON {
-    var stockHq: StockHQ?
+    var name: String?
+    var code: String?
+    var itemList: [ItemModel]?
+    
+    required init() {}
+}
+
+class ItemModel: HandyJSON {
+    var title: String?
+    var titleColor: UIColor?
+    var backgroundColor: UIColor?
+    var precise: Int? = 2 // 精度
+    var font: CGFloat? = 14
+    var width: CGFloat? = 100
+    
     required init() {}
 }

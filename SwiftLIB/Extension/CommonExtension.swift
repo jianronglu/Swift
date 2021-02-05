@@ -7,6 +7,15 @@
 
 import UIKit
 
+enum ClolorWithType: Int {
+    case red
+    case green
+    case gray
+    case black
+    case orange
+    case purple
+}
+
 extension UIColor {
     convenience init(rgb: UInt32) {
         let red = CGFloat(rgb & 0xFF0000 >> 16) / 255

@@ -10,6 +10,19 @@ import Foundation
 typealias StingAnyDictionry = Dictionary<String, Any>
 
 class CommonViewModel: NSObject {
+    private var _titles: [String]? = []
+    var titles: [String]? {
+        set(titles) {
+            _titles = titles
+        }
+        get {
+            if _titles?.count == 0 {
+                _titles = commonTableViewRightItemTitles.components(separatedBy: ",")
+            }
+            return _titles
+        }
+    }
+    
     func fetchData(complete: @escaping (_ stockArr: [StockHQ], _ itemArr: [TableItemModel]) -> Void){
         
         let (stockArr, itemArr) = fetchLocalJson()
@@ -64,8 +77,40 @@ class CommonViewModel: NSObject {
     
     private func tableItem(model: StockHQ?) -> TableItemModel {
         let m = TableItemModel()
-        m.stockHq = model
+        m.name = model?.name
+        m.code = model?.code
+        ItemList(model: model)
         return m
     }
+    
+    func ItemList(model: StockHQ?) -> [ItemModel]? {
+        var items:[ItemModel] = []
+        
+        let item = ItemModel()
+        item.title = "最新价"
+        item.width = 100;
+        
+        items.append(item)
+        
+        
+        
+        return items
+    }
+    
+    
 }
 
+/*
+ - 0 : "最新价"
+ - 1 : "涨跌幅"
+ - 2 : "涨跌额"
+ - 3 : "昨收"
+ - 4 : "涨速"
+ - 5 : "换手率"
+ - 6 : "成交量"
+ - 7 : "成交额"
+ - 8 : "今开"
+ - 9 : "最高"
+ - 10 : "最低"
+ - 11 : "市盈率"
+ */
