@@ -8,11 +8,12 @@
 import Foundation
 
 class DecimalNumberUtil {
-    static func transNumber(num: Float, precise: uint?) -> String {
+    static func transNumber(num: Float?, precise: UInt?) -> String {
+        guard num != 0 else { return "--"}
         
-        let number = NSNumber(value: num)
+        let number = NSNumber(value: num!)
         
-        guard let type = NumberFormatter.Style(rawValue: NumberFormatter.Style.RawValue(precise ?? 2)) else { return "精度有误" }
+        guard let type = NumberFormatter.Style(rawValue: NumberFormatter.Style.RawValue(precise ?? 2)) else { return "unknown error" }
         
         let decimal = NumberFormatter.localizedString(from: number, number: type)
         

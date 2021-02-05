@@ -180,5 +180,15 @@ class CommonTableViewCell: UITableViewCell, UIScrollViewDelegate{
     internal func setSubViewProperty(model: TableItemModel?) {
         nameLabel?.text = model?.name
         codeLabel?.text = model?.code
+        if let arr = model?.itemList {
+            var i: Int = 0
+            for label in rightLabels! {
+                let item = arr[i]
+                
+                label.text = item.title
+                i += 1
+            }
+            
+        }
     }
 }

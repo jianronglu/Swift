@@ -84,7 +84,7 @@ class StockHQ: HandyJSON {
     var everyHand: Int?
     var origCategory: Int?
     var upDays: Int?
-    var openPrice: Int?
+    var openPrice: Float?
     var pbRatio: Float?
     var peRatioTTM: Float?
     var nowVol: Int?
@@ -144,7 +144,7 @@ class StockHQ: HandyJSON {
     var peRatioStatic: Float?
     var revenueGrowthRatio3Y: Int?
     var outsideVol: Int?
-    var nowPrice: Int?
+    var nowPrice: Float?
     var hkVCM: Bool?
     var headChangeRatio: Int?
     var openInterestDiff: Int?
@@ -167,7 +167,7 @@ class StockHQ: HandyJSON {
     var avgPrice: Int?
     var ipoDate: Int?
     var upSpeed: Int?
-    var precise: Int?
+    var precise: UInt?
     var warrantType: Int?
     var divideLFY: Int?
     var sameRight: Bool?
@@ -185,6 +185,8 @@ class TableItemModel: HandyJSON {
 
 class ItemModel: HandyJSON {
     var title: String?
+    var describe: String?
+    
     var titleColor: UIColor?
     var backgroundColor: UIColor?
     var precise: Int? = 2 // 精度

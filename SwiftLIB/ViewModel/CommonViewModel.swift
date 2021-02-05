@@ -79,25 +79,66 @@ class CommonViewModel: NSObject {
         let m = TableItemModel()
         m.name = model?.name
         m.code = model?.code
-        ItemList(model: model)
+        m.itemList = ItemList(model: model)
         return m
     }
     
     func ItemList(model: StockHQ?) -> [ItemModel]? {
         var items:[ItemModel] = []
         
-        let item = ItemModel()
-        item.title = "最新价"
-        item.width = 100;
+        let zxjItem = createItem(num: model?.nowPrice, precise: model?.precise, describe: "最新价")
+        items.append(zxjItem)
         
-        items.append(item)
+        let zdfItem = createItem(num: model?.changeRatio, precise: model?.precise, describe:  "涨跌幅")
+        items.append(zdfItem)
         
+        let zdeItem = createItem(num: model?.changeValue, precise:  model?.precise, describe: "涨跌额")
+        items.append(zdeItem)
         
+        let zsItem = createItem(num: model?.yClosePrice, precise:  model?.precise, describe: "昨收")
+        items.append(zsItem)
+        
+        let upItem = createItem(num: model?.changeValue, precise:  model?.precise, describe: "涨速")
+        items.append(upItem)
+        
+        let rateItem = createItem(num: model?.turnoverRate, precise:  model?.precise, describe: "换手率")
+        items.append(rateItem)
+        
+        let cjlItem = createItem(num: model?.dealVol, describe: "成交量")
+        items.append(cjlItem)
+        
+        let cjeItem = createItem(num: model?.dealAmount, describe: "成交额")
+        items.append(cjeItem)
+        
+        let openItem = createItem(num: model?.openPrice, precise:  model?.precise, describe: "今开")
+        items.append(openItem)
+        
+        let zgItem = createItem(num: model?.highPrice, precise:  model?.precise, describe: "最高")
+        items.append(zgItem)
+        
+        let lowItem = createItem(num: model?.lowPrice, precise:  model?.precise, describe: "最低")
+        items.append(lowItem)
+        
+        let peItem = createItem(num: model?.peRatio, precise:  model?.precise, describe: "市盈率")
+        items.append(peItem)
         
         return items
     }
+
+    func createItem(num: Float?, precise: UInt?, describe: String) -> ItemModel  {
+        let item = ItemModel()
+        item.describe = describe
+        item.title = DecimalNumberUtil.transNumber(num: num, precise: precise)
+        item.width = 100
+        return item
+    }
     
-    
+    func createItem(num: Int?, describe: String) -> ItemModel {
+        let item = ItemModel()
+        item.describe = describe
+        item.width = 100
+        return item
+    }
 }
 
 /*
