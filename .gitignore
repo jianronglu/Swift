@@ -6,8 +6,21 @@
 
 **/xcuserdata/
 
+**/Pods/Pods.xcodeproj/project.pbxproj/
+
 *.xcworkspace
 
 **/R.generated.swift
 
 **/Pods/Pods.xcodeproj/
+
+**/SwiftLIB.xcworkspace/
+
+**/Pods/Target Support Files/Pods-SwiftLIB/
+
+*.xcodeproj/project.pbxproj
+*.xcodeproj/*
+*.xcodeproj/project.pbxproj
+*.xcodeproj/xcshareddat
+*/xcuserdata/
+*.xcworkspace/contents.xcworkspacedata

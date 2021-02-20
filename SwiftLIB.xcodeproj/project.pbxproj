@@ -24,6 +24,7 @@
 		89E8555C25CA7963000EA364 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89E8555B25CA7963000EA364 /* Model.swift */; };
 		89E8555F25CA7BF0000EA364 /* CommonViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89E8555E25CA7BF0000EA364 /* CommonViewModel.swift */; };
 		9129E94B05996FCC56C19193 /* libPods-SwiftLIB.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B5F23A1FE91B625EC1A8F08 /* libPods-SwiftLIB.a */; };
+		9326866025E0D539001788DA /* BaseCommonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9326865F25E0D539001788DA /* BaseCommonCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,6 +49,7 @@
 		89E8554D25CA6F9C000EA364 /* CommonData.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = CommonData.json; sourceTree = "<group>"; };
 		89E8555B25CA7963000EA364 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		89E8555E25CA7BF0000EA364 /* CommonViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonViewModel.swift; sourceTree = "<group>"; };
+		9326865F25E0D539001788DA /* BaseCommonCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCommonCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +79,7 @@
 				8992025925C8ED38001C969D /* CommonTableView.swift */,
 				8992025C25C8F69F001C969D /* CommonTableViewCell.swift */,
 				89E8554925CA4346000EA364 /* CommonTableViewHeader.swift */,
+				9326865F25E0D539001788DA /* BaseCommonCell.swift */,
 			);
 			path = CommonTableView;
 			sourceTree = "<group>";
@@ -275,7 +278,6 @@
 			inputPaths = (
 				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
 				"${PODS_ROOT}/Manifest.lock",
-				"$(SRCROOT)/newInputFile",
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputFileListPaths = (
@@ -300,6 +302,7 @@
 				8992025A25C8ED38001C969D /* CommonTableView.swift in Sources */,
 				89E8555C25CA7963000EA364 /* Model.swift in Sources */,
 				89C4E6DD25C7E5F300B85C0C /* MainViewController.swift in Sources */,
+				9326866025E0D539001788DA /* BaseCommonCell.swift in Sources */,
 				89B5676D25CCE48C0095392D /* DecimalNumberUtil.swift in Sources */,
 				89E8554A25CA4346000EA364 /* CommonTableViewHeader.swift in Sources */,
 				8992026025C8FEA4001C969D /* CommonConfig.swift in Sources */,
