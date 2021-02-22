@@ -7,14 +7,22 @@
 
 import UIKit
 
+protocol CommonTableViewDelegate: AnyObject {
+    func commonTableViewDidSelectIndex(commonTableView: CommonTableView, model: TableItemModel)
+}
+
+typealias CommonClickBlock = (CommonTableView, TableItemModel, IndexPath) -> Void
+
 class CommonTableView: UIView, UITableViewDelegate, UITableViewDataSource,CommonTableViewCellDelegate, CommonTableViewHeaderDelegate {
     
     let commonTableViewCellKey = "commonCellKey"
     let config = CommonTableViewCellConfig().defaultCellConfig()
     var commonHeaderView: CommonTableViewHeader?
-    
-    
+        
     var tableView: UITableView?
+    var delegate: CommonTableViewDelegate?
+    
+    var didSelectRowBlock: CommonClickBlock?
     
     private var _dataSource: [TableItemModel]?
     var dataSource: [TableItemModel]? {
@@ -75,7 +83,18 @@ class CommonTableView: UIView, UITableViewDelegate, UITableViewDataSource,Common
         c.delegate = self
         return c
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
+        if didSelectRowBlock == nil {
+            didSelectRowBlock = { a, b, c in
+                print("a = \(a), b = \(b), c = \(c)")
+            }
+        }
+        didSelectRowBlock!(self, _dataSource?[indexPath.row] ?? TableItemModel(), indexPath)
+
+    }
+   
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 40.0

@@ -89,7 +89,7 @@ class CommonViewModel: NSObject {
         let zxjItem = createItem(num: model?.nowPrice, precise: model?.precise, describe: "最新价")
         items.append(zxjItem)
         
-        let zdfItem = createItem(num: model?.changeRatio, precise: model?.precise, describe:  "涨跌幅")
+        let zdfItem = createItem(num: model?.changeRatio, style: .percent, precise: model?.precise, describe: "涨跌幅")
         items.append(zdfItem)
         
         let zdeItem = createItem(num: model?.changeValue, precise:  model?.precise, describe: "涨跌额")
@@ -98,10 +98,10 @@ class CommonViewModel: NSObject {
         let zsItem = createItem(num: model?.yClosePrice, precise:  model?.precise, describe: "昨收")
         items.append(zsItem)
         
-        let upItem = createItem(num: model?.changeValue, precise:  model?.precise, describe: "涨速")
+        let upItem = createItem(num: model?.changeValue, style: .percent, precise:  model?.precise, describe: "涨速")
         items.append(upItem)
         
-        let rateItem = createItem(num: model?.turnoverRate, precise:  model?.precise, describe: "换手率")
+        let rateItem = createItem(num: model?.turnoverRate, style: .percent, precise: model?.precise, describe: "换手率")
         items.append(rateItem)
         
         let cjlItem = createItem(num: model?.dealVol, describe: "成交量")
@@ -126,9 +126,13 @@ class CommonViewModel: NSObject {
     }
 
     func createItem(num: Float?, precise: UInt?, describe: String) -> ItemModel  {
+        return createItem(num: num, style: .decimal, precise: precise, describe: describe)
+    }
+    
+    func createItem(num: Float?, style:NumberFormatter.Style, precise: UInt?, describe: String) -> ItemModel {
         let item = ItemModel()
         item.describe = describe
-        item.title = DecimalNumberUtil.transNumber(num: num, precise: precise)
+        item.title = DecimalNumberUtil.transNumber(num: num, style: style, precise: precise)
         item.width = 100
         return item
     }
@@ -136,6 +140,7 @@ class CommonViewModel: NSObject {
     func createItem(num: Int?, describe: String) -> ItemModel {
         let item = ItemModel()
         item.describe = describe
+        item.title = DecimalNumberUtil.transNumber(num: num, style: .none)
         item.width = 100
         return item
     }
