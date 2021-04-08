@@ -151,6 +151,7 @@
 			isa = PBXGroup;
 			children = (
 				89E8554D25CA6F9C000EA364 /* CommonData.json */,
+				933A875E261F6B4600941631 /* images */,
 			);
 			path = Resource;
 			sourceTree = "<group>";
@@ -170,6 +171,13 @@
 				8992025F25C8FEA4001C969D /* CommonConfig.swift */,
 			);
 			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		933A875E261F6B4600941631 /* images */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = images;
 			sourceTree = "<group>";
 		};
 		CBC3DF934FA156C0B73FA5F3 /* Frameworks */ = {
