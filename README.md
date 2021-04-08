@@ -24,4 +24,4 @@
     ├── CommonConfig.swift
     └── CommonViewModel.swift
 ```
-![](SwiftLIB/Resource/images/UI事件传递.png)
+![](../Resource/images/UI事件传递.png)
